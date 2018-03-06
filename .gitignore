@@ -1,0 +1,5 @@
+*.swp
+remote-shell
+*~
+\#*
+compiled
