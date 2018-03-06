@@ -23,7 +23,10 @@
 (define-syntax-rule
   (with-cwd dir expr ...)
   (parameterize
-    ([cwd (format "~a/~a" (cwd) dir)])
+    ([cwd
+      (match (substring dir 0 1)
+        ["/" dir]
+        [_ (format "~a/~a" (cwd) dir)])])
     (begin expr ...)))
 
 (define-syntax-rule
@@ -48,7 +51,7 @@
 
 (define (exec cmd)
   (displayln
-    (format "on ~a:" (remote-host (host))))
+    (format "Executed on ~a:" (remote-host (host))))
   (ssh (host)
        (as-user
    (string-append
