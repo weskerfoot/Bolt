@@ -13,6 +13,9 @@
 (define host
   (make-parameter #f))
 
+(define hostname
+  (make-parameter #f))
+
 (define user
   (make-parameter #f))
 
@@ -37,7 +40,8 @@
 (define-syntax-rule
   (with-host remote expr ...)
   (parameterize
-    ([host remote])
+    ([host remote]
+     [hostname (remote-host remote)])
      (begin expr ...)))
 
 (define-syntax-rule
