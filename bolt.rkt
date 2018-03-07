@@ -2,6 +2,11 @@
 
 (require remote-shell/ssh)
 
+(define (strip-first-line st)
+  (string-join
+   (cdr
+    (string-split st "\n"))))
+
 (define cwd
   (make-parameter "~"))
 
@@ -52,12 +57,20 @@
 (define (exec cmd)
   (displayln
     (format "Executed on ~a:" (remote-host (host))))
-  (ssh (host)
+  (match
+      (ssh (host)
        (as-user
-   (string-append
-    (format "cd ~a && "
-            (cwd))
-    cmd))))
+        (string-append
+         (format "cd ~a && "
+                 (cwd))
+         cmd))
+       #:failure-log "/tmp/test.log"
+       #:mode 'output)
+    [(cons code output)
+     (cons code
+           (strip-first-line
+            (bytes->string/utf-8 output)))]
+    [output output]))
 
 (define ((make-cmd cmd)) (exec cmd))
 
