@@ -5,7 +5,8 @@
 (define (strip-first-line st)
   (string-join
    (cdr
-    (string-split st "\n"))))
+    (string-split st "\n"))
+   "\n"))
 
 (define cwd
   (make-parameter "~"))
@@ -75,6 +76,18 @@
            (strip-first-line
             (bytes->string/utf-8 output)))]
     [output output]))
+
+(define (copy-file source dest)
+  (displayln
+    (format "Copying file to ~a:" (remote-host (host))))
+  (scp
+    (host)
+    source
+    (format "~a@~a:~a" (user) (remote-host (host)) dest)
+    #:mode 'result))
+
+
+; TODO copy directories by gzipping them up somehow
 
 (define ((make-cmd cmd)) (exec cmd))
 
