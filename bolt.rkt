@@ -1,6 +1,7 @@
 #lang racket
 
 (require remote-shell/ssh)
+(require "directory.rkt")
 
 (define (strip-first-line st)
   (string-join
@@ -86,8 +87,13 @@
     (format "~a@~a:~a" (user) (remote-host (host)) dest)
     #:mode 'result))
 
-
-; TODO copy directories by gzipping them up somehow
+(define (copy-dir source dest)
+  (define tar-path (compress source))
+  (copy-file tar-path tar-path)
+  (remove-tmp tar-path)
+  (exec (format "mkdir -p ~a" dest))
+  (exec (format "tar -xzvf ~a -C ~a" tar-path dest))
+  (exec (format "rm ~a" tar-path)))
 
 (define ((make-cmd cmd)) (exec cmd))
 
@@ -95,4 +101,4 @@
 (define pwd (make-cmd "pwd"))
 
 (provide
-  (all-defined-out) remote)
+  (all-defined-out) remote compress)
