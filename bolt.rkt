@@ -2,6 +2,7 @@
 
 (require remote-shell/ssh)
 (require "directory.rkt")
+(require "shell_env.rkt")
 
 (define (strip-first-line st)
   (string-join
@@ -101,4 +102,4 @@
 (define pwd (make-cmd "pwd"))
 
 (provide
-  (all-defined-out) remote compress)
+  (all-defined-out) remote compress shell-env set-vars format-vars)
