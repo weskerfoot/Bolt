@@ -60,7 +60,7 @@
              (user)
              (format-vars)
              cmd)
-   cmd))
+   (format "~a ~a" (format-vars) cmd)))
 
 (define (exec cmd)
   (displayln
@@ -106,4 +106,6 @@
   (all-defined-out)
   remote
   compress
+  shell-env
+  format-vars
   with-shell-vars)
