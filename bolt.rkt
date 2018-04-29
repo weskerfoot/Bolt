@@ -56,8 +56,9 @@
 (define (as-user cmd)
   (if
    (user)
-     (format "sudo -u ~a sh -c \"~a\""
+     (format "sudo -u ~a ~a sh -c \"~a\""
              (user)
+             (format-vars)
              cmd)
    cmd))
 
@@ -102,4 +103,4 @@
 (define pwd (make-cmd "pwd"))
 
 (provide
-  (all-defined-out) remote compress shell-env set-vars format-vars)
+  (all-defined-out) remote compress shell-env set-vars format-vars with-shell-vars)
