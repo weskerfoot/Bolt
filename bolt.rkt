@@ -103,4 +103,7 @@
 (define pwd (make-cmd "pwd"))
 
 (provide
-  (all-defined-out) remote compress shell-env set-vars format-vars with-shell-vars)
+  (all-defined-out)
+  remote
+  compress
+  with-shell-vars)
