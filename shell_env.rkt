@@ -40,7 +40,7 @@
     (hash-map
       (shell-env)
       (lambda (k v)
-        (format "~a=~a" k v)))))
+        (format "export ~a=~a;" k v)))))
 
 (define-syntax join-shell-vars
   (syntax-rules ()

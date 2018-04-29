@@ -56,7 +56,7 @@
 (define (as-user cmd)
   (if
    (user)
-     (format "sudo -u ~a sh -c \"~a\""
+     (format "sudo -u ~a sh -c '~a'"
              (user)
              cmd)
    cmd))
@@ -67,11 +67,11 @@
   (match
       (ssh (host)
        (as-user
-        (string-append
-         (format "cd ~a && ~a; "
+         (format "cd ~a && ~a ~a"
                  (cwd)
-                 (format-vars))
-         cmd))
+                 (format-vars)
+                 cmd)
+         )
        #:failure-log "/tmp/test.log"
        #:mode 'output)
     [(cons code output)
