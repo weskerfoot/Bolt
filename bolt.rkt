@@ -56,11 +56,10 @@
 (define (as-user cmd)
   (if
    (user)
-     (format "sudo -u ~a ~a sh -c \"~a\""
+     (format "sudo -u ~a sh -c \"~a\""
              (user)
-             (format-vars)
              cmd)
-   (format "~a ~a" (format-vars) cmd)))
+   cmd))
 
 (define (exec cmd)
   (displayln
@@ -69,8 +68,9 @@
       (ssh (host)
        (as-user
         (string-append
-         (format "cd ~a && "
-                 (cwd))
+         (format "cd ~a && ~a; "
+                 (cwd)
+                 (format-vars))
          cmd))
        #:failure-log "/tmp/test.log"
        #:mode 'output)
