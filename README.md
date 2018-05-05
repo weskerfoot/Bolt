@@ -3,13 +3,16 @@ Bolt
 
 Bolt is an automation DSL, similar to [http://fabfile.org](http://fabfile.org)
 
+### Installation
+
+
 Example:
 
 ```
 #! /usr/bin/env racket
 #lang racket
 
-(require "src/bolt.rkt")
+(require bolt)
 
 ; This is based on an entry in ~/.ssh/config
 (define metaverse
