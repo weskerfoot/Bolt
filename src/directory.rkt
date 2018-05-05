@@ -13,7 +13,7 @@
     (format "/tmp/~a.tar.gz"
             (clean-path directory)))
 
-  (system* tar "-zcvf" path directory)
+  (system* tar "-zcvf" path "-C" directory ".")
   path)
 
 (define (remove-tmp path)

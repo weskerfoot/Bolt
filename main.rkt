@@ -1,4 +1,4 @@
 #lang racket/base
 
-(require "bolt.rkt")
-(provide (all-from-out "bolt.rkt"))
+(require "./src/bolt.rkt")
+(provide (all-from-out "./src/bolt.rkt"))

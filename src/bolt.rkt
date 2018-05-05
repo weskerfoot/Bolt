@@ -69,7 +69,7 @@
        (as-user
          (format "cd ~a && ~a ~a"
                  (cwd)
-                 (format-vars)
+                 (format-vars (shell-env))
                  cmd)
          )
        #:failure-log "/tmp/test.log"
