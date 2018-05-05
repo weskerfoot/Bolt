@@ -23,7 +23,7 @@ Example:
     (with-shell-vars
       (["FOO" "BAR"])
       (become "alice"
-        (copy-dir "../myode" "/home/alice/mycode")
+        (copy-dir "../mycode" "/home/alice/mycode")
 
         (with-cwd "/home/alice/mycode"
 
