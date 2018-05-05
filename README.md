@@ -6,7 +6,7 @@ Bolt is an automation DSL, similar to [http://fabfile.org](http://fabfile.org)
 ### Installation
 ```
 git clone git@github.com:weskerfoot/Bolt.git
-raco pkg install --link bolt
+cd bolt; raco pkg install
 ```
 
 Example:
