@@ -23,14 +23,14 @@ Example:
     (with-shell-vars
       (["FOO" "BAR"])
       (become "alice"
-      (copy-dir "../myode" "/home/alice/mycode")
+        (copy-dir "../myode" "/home/alice/mycode")
 
-      (with-cwd "/home/alice/mycode"
+        (with-cwd "/home/alice/mycode"
 
-        (become "root"
-          (exec "pip install pipenv"))
+          (become "root"
+            (exec "pip install pipenv"))
 
-        (with-cwd "project"
-          (exec "pipenv install")))))))
+          (with-cwd "project"
+            (exec "pipenv install")))))))
 (deploy)
 ```
