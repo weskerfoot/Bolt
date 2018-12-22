@@ -1,5 +1,6 @@
 #lang racket
 
+(require "execute.rkt")
 (require remote-shell/ssh)
 (require "directory.rkt")
 (require "shell_env.rkt")
@@ -65,15 +66,13 @@
   (displayln
     (format "Executed on ~a:" (remote-host (host))))
   (match
-      (ssh (host)
+      ((make-exec (hostname))
        (as-user
          (format "cd ~a && ~a ~a"
                  (cwd)
                  (format-vars (shell-env))
                  cmd)
-         )
-       #:failure-log "/tmp/test.log"
-       #:mode 'output)
+         ))
     [(cons code output)
      (cons code
            (strip-first-line
