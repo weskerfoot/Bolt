@@ -26,6 +26,9 @@
 (define commands
   (make-parameter #f))
 
+(define executor
+  (make-parameter #f))
+
 (define-syntax-rule
   (plan expr ...)
   (parameterize
@@ -45,7 +48,8 @@
   (with-host remote expr ...)
   (parameterize
     ([host remote]
-     [hostname (remote-host remote)])
+     [hostname (remote-host remote)]
+     [executor (make-exec (remote-host remote))])
      (begin expr ...)))
 
 (define-syntax-rule
@@ -66,7 +70,7 @@
   (displayln
     (format "Executed on ~a:" (remote-host (host))))
   (match
-      ((make-exec (hostname))
+      ((executor)
        (as-user
          (format "cd ~a && ~a ~a"
                  (cwd)
