@@ -3,6 +3,9 @@ Bolt
 
 Bolt is an automation DSL, similar to [http://fabfile.org](http://fabfile.org)
 
+It runs tasks concurrently. It is currently only experimental but can be used
+for basic tasks.
+
 ### Installation
 ```
 git clone git@github.com:weskerfoot/Bolt.git
